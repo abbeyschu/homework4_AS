@@ -5,18 +5,26 @@
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
+body {
+    margin: 20px;
+}
+
 header {
-    font-size: 36pt;
-    font-style: bold;
     text-align: center;
+    font-size: 24pt;
+}
+
+header div {
+    font-size: 18pt;
 }
 
 main {
     border-style: solid;
     border-width: thick;
-    margin: 20%;
+    margin: 50px;
     padding: 25px;
     text-align: center;
+    justify-content: center;
 }
 
 #question {
@@ -34,4 +42,8 @@ button{
     background-color: darkcyan;
     padding: 10px;
     margin: 5px;
+}
+
+.scoreboard{
+    font-size: 16pt;
 }

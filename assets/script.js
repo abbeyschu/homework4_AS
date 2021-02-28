@@ -7,8 +7,12 @@ const a = document.getElementById("a");
 const b = document.getElementById("b");
 const c = document.getElementById("c");
 const d = document.getElementById("d");
+const scoreboard = document.getElementById("scoreboard");
 const scoreContainer = document.getElementById("score");
+var score = 0;
 const timerContainer = document.getElementById("timer");
+var timeLeft = 60;
+var timerInterval
 
 // questions to ask in the quiz
 const questions = [
@@ -45,16 +49,16 @@ const questions = [
         correct: "d"
     },
     {
-        question: "const variables can neither be updated nor re-declared",
-        answerA: "True",
-        answerB: "False",
+        question: "Which of the following can neither be updated nor re-declared?",
+        answerA: "const",
+        answerB: "num",
+        answerC: "var",
+        answerD: "let",
         correct: "a"
     },
 ];
 
-var score = 0;
-
-// variables for array reference
+// variables for questions array reference
 const lastQuestion = questions.length - 1;
 var runningQuestion = 0;
 
@@ -68,6 +72,24 @@ function showQuestion(){
     d.innerHTML = q.answerD;
 };
 
+// beginning timer function
+function setTime() {
+    timerInterval = setInterval(function() {
+    timeLeft--;
+    timerContainer.textContent = timeLeft + " seconds left";
+
+    if(timeLeft === 0) {
+      clearInterval(timerInterval);
+      endQuiz();
+    };
+},1000);
+};
+
+// beginning score function
+function setScore(){
+    scoreContainer.textContent = "Number Correct: " + score
+};
+
 // event listener for beginning the quiz
 start.addEventListener("click",startQuiz);
 
@@ -75,30 +97,62 @@ start.addEventListener("click",startQuiz);
 function startQuiz(){
     start.style.display = "none";
     quiz.style.display = "block";
+    timerContainer.style.display = "block";
+    scoreContainer.style.display = "block";
     showQuestion();
+    setTime();
+    setScore();
 };
 
+function isCorrect(){
+    score++;
+    setScore();
+};
+
+function isWrong(){
+    timeLeft -= 10;
+};
+
+function endQuiz(){
+    timerContainer.style.display = "none";
+    scoreContainer.style.display = "none";
+    answerContainer.style.display = "none";
+    questionContainer.textContent = "All Done! You got " + score + " out of 5 questions correct.";
+    scoreboard.style.display = "block";
+    // create text box for name
+    var createTextBox = document.createElement("INPUT");
+    createTextBox.setAttribute("type","text");
+    document.getElementById("scoreboard").appendChild(createTextBox);
+    // create submit button for name
+    var createButton = document.createElement("Button");
+    createButton.innerHTML = "submit"
+    document.getElementById("scoreboard").appendChild(createButton);
+    // add name and score to list
+    createButton.addEventListener("click",addName);
+    function addName(){
+        var add = document.createElement("div");
+        add.innerHTML = createTextBox.value + " - " + score;
+        document.getElementById("list").appendChild(add);
+    };
+};
+
+// this function determines what is done after an answer is selected
 function checkAnswer(answer){
     if( answer == questions[runningQuestion].correct){
-        score++;
-    // }else{
-    //     answerIsWrong();
-    // }
+        isCorrect();
+        nextQuestion();
+    } else {
+        isWrong();
+        nextQuestion();
+    }
+};
+
+// function to determine end of quiz
+function nextQuestion(){
     if(runningQuestion < lastQuestion){
         runningQuestion++;
         showQuestion();
-    }else{
-        clearInterval(TIMER);
-        scoreRender();
+    } else{
+        endQuiz();
     }
-}
-}
-
-
-// for(var i=0; i < questions.length; i++){
-//     var response = window.prompt(questions[i].prompt)
-//     if(response === questions[i].answer) {
-//         score++;
-//     }
-// }
-// alert("you got " + score + "/" + questions.length);
+};

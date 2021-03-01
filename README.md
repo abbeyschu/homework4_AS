@@ -5,11 +5,11 @@ The goal of this project was to create a multiple choice quiz about Javascript. 
 
 ## Installation
 
-Visit this link to view the random password generator: https://abbeyschu.github.io/homework4_AS/
+Visit this link to view the code quiz: https://abbeyschu.github.io/homework4_AS/
 
 ## Screenshots
 
-Main screen when the page loads:
+Initial Quiz Screen:
 
 ![Image of Code Quiz](assets/images/QuizScreenshot.png)
 

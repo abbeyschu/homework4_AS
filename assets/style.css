@@ -14,8 +14,14 @@ header {
     font-size: 24pt;
 }
 
+header h2 {
+    font-size: 18pt;
+    font-style: italic;
+}
+
 header div {
     font-size: 18pt;
+    color: green;
 }
 
 main {
@@ -37,13 +43,34 @@ main {
     padding: 20px;
     }
 
-button{
+.choice,
+#start{
     font-size: 24pt;
     background-color: darkcyan;
     padding: 10px;
     margin: 5px;
 }
 
-.scoreboard{
+#submit,
+#restart{
     font-size: 16pt;
+    background-color: darkcyan;
+    padding: 10px;
+    margin: 5px;
+}
+
+#scoreboard{
+    font-size: 16pt;
+    margin: 20px;
+}
+
+#list{
+    font-size: 18pt;
+    font-weight: bold;
+    margin: 20px;
+}
+
+#list div {
+    font-size: 14pt;
+    font-weight: normal;
 }

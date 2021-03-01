@@ -8,11 +8,15 @@ const b = document.getElementById("b");
 const c = document.getElementById("c");
 const d = document.getElementById("d");
 const scoreboard = document.getElementById("scoreboard");
+const textbox = document.getElementById("textbox");
+const submit = document.getElementById("submit");
+const restart = document.getElementById("restart");
+const list = document.getElementById("list");
 const scoreContainer = document.getElementById("score");
 var score = 0;
 const timerContainer = document.getElementById("timer");
 var timeLeft = 60;
-var timerInterval
+var timerInterval;
 
 // questions to ask in the quiz
 const questions = [
@@ -58,7 +62,6 @@ const questions = [
     },
 ];
 
-// variables for questions array reference
 const lastQuestion = questions.length - 1;
 var runningQuestion = 0;
 
@@ -72,7 +75,7 @@ function showQuestion(){
     d.innerHTML = q.answerD;
 };
 
-// beginning timer function
+//timer function
 function setTime() {
     timerInterval = setInterval(function() {
     timeLeft--;
@@ -114,27 +117,32 @@ function isWrong(){
 };
 
 function endQuiz(){
+    // hide/show certain html elements
     timerContainer.style.display = "none";
     scoreContainer.style.display = "none";
     answerContainer.style.display = "none";
     questionContainer.textContent = "All Done! You got " + score + " out of 5 questions correct.";
     scoreboard.style.display = "block";
-    // create text box for name
-    var createTextBox = document.createElement("INPUT");
-    createTextBox.setAttribute("type","text");
-    document.getElementById("scoreboard").appendChild(createTextBox);
-    // create submit button for name
-    var createButton = document.createElement("Button");
-    createButton.innerHTML = "submit"
-    document.getElementById("scoreboard").appendChild(createButton);
-    // add name and score to list
-    createButton.addEventListener("click",addName);
+    list.style.display = "block";
+
+    // add name and score to list (button)
+    submit.addEventListener("click",addName);
     function addName(){
         var add = document.createElement("div");
-        add.innerHTML = createTextBox.value + " - " + score;
+        add.innerHTML = textbox.value + " - " + score;
         document.getElementById("list").appendChild(add);
+    }
+    // restart game (button)
+    restart.addEventListener("click", restartQuiz);
+        function restartQuiz(){
+            scoreboard.style.display = "none";
+            answerContainer.style.display = "block";
+            runningQuestion = 0
+            score = 0
+            timeLeft = 60
+            startQuiz();
+        };
     };
-};
 
 // this function determines what is done after an answer is selected
 function checkAnswer(answer){

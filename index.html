@@ -10,6 +10,7 @@
 <body>
     <header>
         <h1>Javascript Quiz!</h1>
+        <h2>You have 60 seconds to answer 5 questions about Javascript. For every question answered incorrectly, 10 seconds is subtracted from the timer.</h2>
         <div id="timer" style="display: none"></div>
         <div id="score" style="display: none"></div>
     </header>
@@ -25,8 +26,13 @@
             </div> 
         </div>
     </main>
-        <div id="scoreboard" style="display: none;">Enter your name or initials </div>
-        <div id="list"></div>
+        <div id="scoreboard" style="display: none;">
+            <div>Enter your name or initials to store your score</div>
+            <input id = "textbox" type="text"></input>
+            <button id="submit">Submit</button>
+            <button id="restart">Restart</button>
+        </div>
+        <div id="list" style="display: none;">Recent Scores</div>
     <script src="assets/script.js"></script>
 </body>
 </html>

@@ -77,6 +77,7 @@ function showQuestion(){
 
 //timer function
 function setTime() {
+    clearInterval(timerInterval);
     timerInterval = setInterval(function() {
     timeLeft--;
     timerContainer.textContent = timeLeft + " seconds left";
@@ -107,11 +108,13 @@ function startQuiz(){
     setScore();
 };
 
+// add to score if answer is correct
 function isCorrect(){
     score++;
     setScore();
 };
 
+// subtract time if answer is wrong
 function isWrong(){
     timeLeft -= 10;
 };
